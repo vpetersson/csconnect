@@ -2,8 +2,7 @@
 
 ## About
 
-csconnect.py is a Python-script that connects to [CloudSigma](http://www.cloudsigma.com)'s [API](http://cloudsigma.com/en/platform-details/the-api) and retreives the IPs for your servers.
-I wrote this tool, since I was tired of having to log into the web-interface to find out an IP for a given node. 
+csconnect.py is a Python-script that connects to [CloudSigma](http://www.cloudsigma.com)'s [API](http://cloudsigma.com/en/platform-details/the-api) and retreives the IPs for your servers. I wrote this tool, since I was tired of having to log into the web-interface to find out an IP for a given node. csconnect.py doesn't actually connect to your servers, it simply generates the connection string for you with the proper IPs.
 
 ## Requirements
 

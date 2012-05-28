@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+"""
+A tool to manage and connect to virtual servers at CloudSigma.
+
+@author Viktor Petersson
+"""
 import pycurl, re, cStringIO, sys, subprocess, pickle, copy
 
 login = 'you@yourdomain.com:yourpassword' # For API access
@@ -79,13 +85,27 @@ if sys.argv[1] == 'syncdb':
         servername = re.sub('name\s+', '', server[findInList(server, 'name')]).lower()
         # We're grabbing the IP of the first NIC and going to asume that is the one we want.
         serverip = re.sub('nic:0:dhcp\s+', '', server[findInList(server, 'nic:0:dhcp')])
-        serverlist[servername] = serverip
+
+        # Only append the node to the list if the IP isn't "auto" (ie powered off)
+        if serverip != 'auto':
+            serverlist[servername] = serverip
 
     # Write 'serverlist' to file
     writefile = open('serverlist.pkl', 'wb')
     pickle.dump(serverlist, writefile)
     writefile.close()
 
+# Dump the database
+elif sys.argv[1] == 'dump':
+    # Read database from file and copy the content
+    openfile = open('serverlist.pkl', 'rb')
+    serverinputlist = pickle.load(openfile)
+    serverlist = copy.copy(serverinputlist)
+    openfile.close()
+
+    for node in serverlist:
+        print(serverlist[node] + "," + node)
+            
 # Connect to a node.
 elif sys.argv[1] == 'connect':
     if len(sys.argv) == 2:
@@ -116,7 +136,7 @@ elif sys.argv[1] == 'connect':
         
         # If only one server is provided, use ssh from terminal, 
         # otherwise use csshX. 
-        # We also append "StrictHostKeyChecking" since an IP can move between nodes on reboot. 
+        # We also append "StrictHostKeyChecking=no" since an IP can move between nodes on reboot. 
         # Yes, I know this opens up for MITM-attacks, so feel free to not append that.
         if len(connectionlist) == 1:
             print("ssh -l " + username + " -o StrictHostKeyChecking=no " + sshinput)

@@ -42,3 +42,9 @@ For instance, if we want to connect to 'server1', 'server2' and 'server3', we ca
 This will return all results matching 'server*'.
 
 It's also worth pointing out that I pass "StrictHostKeyChecking=no" as an argument to SSH. The reason for this is that if you spin up and down nodes frequently on CloudSigma, chances are that the IPs will be recycled between nodes. By default, SSH will (rightfully) reject that connection to avoid [Man-in-the-Middle attacks](http://en.wikipedia.org/wiki/Man-in-the-middle_attack). Since we retreive IP directy from CloudSigma's API, we can be fairly certain that the IP we received is the correct IP. Yet, if you're paranoid, feel free to *not* append this flag. 
+
+### Dump the database
+
+Sometimes it is useful to dump the database to use for something else. The 'dump' feature allows you to do just that and print in CSV-format (IP,hostname).
+
+> python csconnect.py dump 

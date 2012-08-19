@@ -131,6 +131,7 @@ elif sys.argv[1] == "connect":
 
     # More than one hit -- use csshX
     else:
+        connection_string = "\n".join(flat_list)
         print "echo \"" + connection_string + "\" | " + "csshX --login " + ssh_user + " --ssh_args=\"-o StrictHostKeyChecking=no\" --hosts -"
 
 

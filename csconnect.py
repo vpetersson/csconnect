@@ -95,7 +95,7 @@ def read_db():
     input.close()
     return server_db
 
-if len(sys.argv) == 1:
+if len(sys.argv) == 1 or sys.argv[1] == '--help':
     print """
     Usage:
     csconnect.py syncdb
@@ -131,8 +131,8 @@ elif sys.argv[1] == "connect":
 
     # More than one hit -- use csshX
     else:
-        connection_string = "\n".join(flat_list)
-        print "echo \"" + connection_string + "\" | " + "csshX --login " + ssh_user + " --ssh_args=\"-o StrictHostKeyChecking=no\" --hosts -"
+        connection_string = "\\n".join(flat_list)
+        print "echo -e \"" + connection_string + "\" | " + "csshX --login " + ssh_user + " --ssh_args=\"-o StrictHostKeyChecking=no\" --hosts -"
 
 
 elif sys.argv[1] == "dump":

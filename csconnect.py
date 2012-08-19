@@ -13,7 +13,7 @@ db = os.path.join(conf_dir, 'cache.pkl')
 
 
 # Check if the config-folder exist. 
-#If not, create it.
+# If not, create it.
 if not os.path.isdir(conf_dir):
     os.mkdir(conf_dir)
 

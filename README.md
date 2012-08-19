@@ -7,7 +7,7 @@ csconnect.py is a Python-script that connects to [CloudSigma](http://www.cloudsi
 ## Requirements
 
 * Python 2.6 (or later)
-* PyCurl (pip install pycurl)
+* Requests (pip install requests)
 * [csshX](http://code.google.com/p/csshx/) ([brew](https://github.com/mxcl/homebrew) install csshx)
  * We'll use csshX to connect to more than one node.
 
@@ -45,6 +45,6 @@ It's also worth pointing out that I pass "StrictHostKeyChecking=no" as an argume
 
 ### Dump the database
 
-Sometimes it is useful to dump the database to use for something else. The 'dump' feature allows you to do just that and print in CSV-format (IP,hostname).
+Sometimes it is useful to dump the database to use for something else.
 
 > python csconnect.py dump 
